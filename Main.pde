@@ -5,7 +5,7 @@ Button playButton;
 
 // How many milliseconds between each status update
 // (increase to slow down, decrease to speed up)
-final int UPDATE_INTERVAL = 10000;
+final int UPDATE_INTERVAL = 1000;
 int lastUpdateTime = 0;
 
 // ---- Action message ----
@@ -17,12 +17,13 @@ void setup() {
   size(600, 500);
   textFont(createFont("Arial", 16, true));
 
-  myPet = new VirtualPet4("Coco");
+  myPet = new VirtualPet("Shinra Kusakabe THE HERO");
 
   // Buttons sit along the bottom of the screen
   // Button(label, x, y, width, height)
   feedButton = new Button("Feed", 150, 430, 120, 45);
   playButton = new Button("Play", 330, 430, 120, 45);
+  loadPetImages();
 }
 
 void draw() {
@@ -32,6 +33,12 @@ void draw() {
   if (millis() - lastUpdateTime >= UPDATE_INTERVAL) {
     myPet.updateStatus();
     lastUpdateTime = millis();
+  }
+  
+  ageUp();
+  if (myPet.getAgedUp() == true) {
+    showMessage(myPet.getName() + " has grown up!");
+    myPet.setAgedUp(false);
   }
 
   // ---- Draw sections ----
