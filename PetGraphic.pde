@@ -17,16 +17,17 @@
 // OPTION B SETUP  (comment out if using Option A)
 // =============================================
 
-// ArrayList<PImage> petImages;   // one image per mood/state
+ ArrayList<PImage> petImages;   // one image per mood/state
 
-// void loadPetImages() {
-//   petImages = new ArrayList<PImage>();
-//   petImages.add(loadImage("neutral.png"));  // index 0 - neutral
-//   petImages.add(loadImage("happy.png"));    // index 1 - happy
-//   petImages.add(loadImage("sad.png"));      // index 2 - sad
-//   // add more as needed!
-// }
-//
+ void loadPetImages() {
+   petImages = new ArrayList<PImage>();
+   petImages.add(loadImage("ShinraKidNeutral.png"));  // index 0 - neutral
+   petImages.add(loadImage("ShinraKidHappy.png"));    // index 1 - happy
+   petImages.add(loadImage("ShinraKidSad.png"));      // index 2 - sad
+   // add more as needed!
+   
+ }
+
 // Call loadPetImages() at the end of setup() in VirtualPet.pde
 
 
@@ -46,6 +47,14 @@ void drawPetArea() {
   drawPetGraphic();
 }
 
+void ageUp() {
+  if (myPet.getAgeYears() >= 1) {
+    petImages.set(0, loadImage("ShinraNeutral.png"));
+    petImages.set(1, loadImage("ShinraHappy.png"));
+    petImages.set(2, loadImage("ShinraMad.png"));
+  }
+}
+
 
 // =============================================
 // OPTION A: Drawing with Processing shapes
@@ -53,7 +62,7 @@ void drawPetArea() {
 // =============================================
 
 void drawPetGraphic() {
-
+/*
   // ---- Placeholder shape ----
   // Replace this with your own drawing,
   // or swap it for an image (see Option B below).
@@ -97,7 +106,7 @@ void drawPetGraphic() {
   fill(255, 180, 200);
   triangle(180, 105, 172, 82, 193, 100);
   triangle(240, 105, 248, 82, 227, 100);
-
+*/
   // ---- END placeholder ----
 
 
@@ -107,11 +116,11 @@ void drawPetGraphic() {
   // =============================================
 
   // Choose which image based on pet state:
-  // int index = 0; // neutral default
-  // if (myPet.getEnergyLevel() >= 5 && myPet.getHappinessLevel() >= 5) {
-  //   index = 1; // happy
-  // } else if (myPet.getHappinessLevel() == 0) {
-  //   index = 2; // sad
-  // }
-  // image(petImages.get(index), 60, 60, 300, 300);
+   int index = 0; // neutral default
+   if (myPet.getEnergyLevel() >= 5 && myPet.getHappinessLevel() >= 5) {
+     index = 1; // happy
+   } else if (myPet.getHappinessLevel() <= 0) {
+     index = 2; // sad
+   }
+  image(petImages.get(index), 60, 60, 300, 300);
 }
